@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>graph</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div id="graph" style="height:600px;width:800px">
+
+    </div>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript">
+    var dataArray = [{
+                    "name": "IP",
+                    // x: 0,
+                    // y: yy,
+                    "symbolSize": 80,
+                    "category": "IP",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }, {
+                    "name": "域名",
+                    // x: 100,
+                    // y: yy1,
+                    "symbolSize": 60,
+                    "category": "域名",
+                    "draggable": "true"
+
+                }, {
+                    "name": "HDFS",
+                    // x: 20,
+                    // y: yy,
+                    "symbolSize": 30,
+                    "category": "域名",
+                    "draggable": "true"
+                }, {
+                    // x: 30,
+                    // y: yy1,
+                    "name": "MapReduce",
+                    "symbolSize": 30,
+                    "category": "域名",
+                    "draggable": "true"
+                }, {
+                    // x: 40,
+                    // y: yy,
+                    "name": "YARN",
+                    "symbolSize": 30,
+                    "category": "域名",
+                    "draggable": "true",
+                    "value": 1
+                }, {
+                    // x: 60,
+                    // y: yy,
+                    "name": "http",
+                    "symbolSize": 30,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 130,
+                    // y: yy1,
+                    "name": "service",
+                    "symbolSize": 60,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 140,
+                    // y: yy,
+                    "name": "https",
+                    "symbolSize": 30,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 150,
+                    // y: yy1,
+                    "name": "redis",
+                    "symbolSize": 30,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 170,
+                    // y: yy1,
+                    "name": "数据库",
+                    "symbolSize": 60,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 180,
+                    // y: yy,
+                    "name": "Redis",
+                    "symbolSize": 30,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 190,
+                    // y: yy1,
+                    "name": "MongoDB",
+                    "symbolSize": 30,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 200,
+                    // y: yy,
+                    "name": "LevelDB",
+                    "symbolSize": 30,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 210,
+                    // y: yy1,
+                    "name": "开发语言",
+                    "symbolSize": 60,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 220,
+                    // y: yy,
+                    "name": "Mahout",
+                    "symbolSize": 30,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 230,
+                    // y: yy1,
+                    "name": "port MLlib",
+                    "symbolSize": 30,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 240,
+                    // y: yy,
+                    "name": "Python",
+                    "symbolSize": 30,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 250,
+                    // y: yy1,
+                    "name": "R语言",
+                    "symbolSize": 30,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }];
+                var linksArray= [{
+                    "source": "IP",
+                    "target": "域名"
+                },  {
+                    "source": "IP",
+                    "target": "service"
+                }, {
+                    "source": "IP",
+                    "target": "数据库"
+                }, {
+                    "source": "IP",
+                    "target": "开发语言"
+                }, {
+                    "source": "域名",
+                    "target": "HDFS"
+                }, {
+                    "source": "域名",
+                    "target": "YARN"
+                }, {
+                    "source": "域名",
+                    "target": "MapReduce"
+                }, {
+                    "source": "service",
+                    "target": "http"
+                }, {
+                    "source": "service",
+                    "target": "https"
+                }, {
+                    "source": "service",
+                    "target": "redis"
+                }, {
+                    "source": "数据库",
+                    "target": "Redis"
+                }, {
+                    "source": "数据库",
+                    "target": "MongoDB"
+                }, {
+                    "source": "数据库",
+                    "target": "LevelDB"
+                }, {
+                    "source": "开发语言",
+                    "target": "Mahout"
+                }, {
+                    "source": "开发语言",
+                    "target": "port MLlib"
+                }, {
+                    "source": "开发语言",
+                    "target": "Python"
+                }, {
+                    "source": "开发语言",
+                    "target": "R语言"
+                }];
+                var categoriesArray =  [{
+                    'name': 'IP'
+                }, {
+                    'name': '域名'
+                }, {
+                    'name': 'service'
+                }, {
+                    'name': '数据库'
+                }, {
+                    'name': '开发语言'
+                }];
+         var data = {
+            service:['http','https'],
+            port:[80,81],
+            db:['mysql','mondb']
+         }
+         var dataArr = [{
+                    "name": "IP",
+                    // x: 0,
+                    // y: yy,
+                    "symbolSize": 80,
+                    "category": "IP",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }];
+         var dataLinks = [];
+         var dataCategories = [];
+         for (var h in data) {
+            var dt = {};
+            var categorie = {};
+            var linkstart = {};
+            categorie.name = h;
+            dt.name=h;
+            dt.draggable= true;
+            dt.symbolSize= 40;
+            dt.category = h;
+            linkstart.source = 'IP';
+            linkstart.target = h;
+            dataArr.push(dt);
+            dataCategories.push(categorie);
+            dataLinks.push(linkstart);
+            for (var j = 0; j < data[h].length; j++) {
+                var link = {};
+                var dtlast = {};
+                dtlast.name=data[h][j];
+                dtlast.draggable= true;
+                dtlast.symbolSize= 40;
+                dtlast.category = h;
+                link.source = h;
+                link.target = data[h][j];
+                dataLinks.push(link);
+                dataArr.push(dtlast);
+            };
+         };
+
+        var graph = document.getElementById('graph');
+        var myChart = echarts.init(graph);
+        var size = 60;
+        var size1 = 30;
+        var yy = 200;
+        var yy1 = 250;
+        option = {
+            title: {
+                text: "IP解读",
+                top: "top",
+                left: "middle",
+                textStyle: {
+                    color: '#4d4d4d'
+                }
+            },
+            tooltip: {
+                formatter: '{b}'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            backgroundColor: '#2a2c3a',
+            animationDuration: 1000,
+            animationEasingUpdate: 'quinticInOut',
+            // color:['red','yellow','blue','#ccc','#000'],
+            series: [{
+                name: 'IP分析',
+                type: 'graph',
+                cursor:'pointer',
+                focusNodeAdjacency:false,//是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点。
+                layout: 'force',
+                force: {
+                    repulsion: 500,//节点之间的斥力因子
+                    gravity: 0.1,//节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。
+                    // edgeLength: 70,//边的两个节点之间的距离，这个距离也会受 repulsion
+                    layoutAnimation: true,
+                },
+                data: [{
+                    "name": "IP",
+                    // x: 0,
+                    // y: yy,
+                    "symbolSize": 80,
+                    "category": "IP",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }, {
+                    "name": "域名",
+                    // x: 100,
+                    // y: yy1,
+                    "symbolSize": size,
+                    "category": "域名",
+                    "draggable": "true"
+
+                }, {
+                    "name": "HDFS",
+                    // x: 20,
+                    // y: yy,
+                    "symbolSize": size1,
+                    "category": "域名",
+                    "draggable": "true"
+                }, {
+                    // x: 30,
+                    // y: yy1,
+                    "name": "MapReduce",
+                    "symbolSize": size1,
+                    "category": "域名",
+                    "draggable": "true"
+                }, {
+                    // x: 40,
+                    // y: yy,
+                    "name": "YARN",
+                    "symbolSize": size1,
+                    "category": "域名",
+                    "draggable": "true",
+                    "value": 1
+                }, {
+                    // x: 60,
+                    // y: yy,
+                    "name": "http",
+                    "symbolSize": size1,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 70,
+                    // y: yy,
+                    "name": "port",
+                    "symbolSize": size,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 90,
+                    // y: yy1,
+                    "name": "Scala",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 100,
+                    // y: yy,
+                    "name": "port SQL",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 110,
+                    // y: yy1,
+                    "name": "port Streaming",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 130,
+                    // y: yy1,
+                    "name": "service",
+                    "symbolSize": size,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 140,
+                    // y: yy,
+                    "name": "https",
+                    "symbolSize": size1,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 150,
+                    // y: yy1,
+                    "name": "redis",
+                    "symbolSize": size1,
+                    "category": "service",
+                    "draggable": "true"
+                }, {
+                    // x: 170,
+                    // y: yy1,
+                    "name": "数据库",
+                    "symbolSize": size,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 180,
+                    // y: yy,
+                    "name": "Redis",
+                    "symbolSize": size1,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 190,
+                    // y: yy1,
+                    "name": "MongoDB",
+                    "symbolSize": size1,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 200,
+                    // y: yy,
+                    "name": "LevelDB",
+                    "symbolSize": size1,
+                    "category": "数据库",
+                    "draggable": "true"
+                }, {
+                    // x: 210,
+                    // y: yy1,
+                    "name": "开发语言",
+                    "symbolSize": size,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 220,
+                    // y: yy,
+                    "name": "Mahout",
+                    "symbolSize": size1,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 230,
+                    // y: yy1,
+                    "name": "port MLlib",
+                    "symbolSize": size1,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 240,
+                    // y: yy,
+                    "name": "Python",
+                    "symbolSize": size1,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }, {
+                    // x: 250,
+                    // y: yy1,
+                    "name": "R语言",
+                    "symbolSize": size1,
+                    "category": "开发语言",
+                    "draggable": "true"
+                }],
+                links: [{
+                    "source": "IP",
+                    "target": "域名"
+                }, {
+                    "source": "IP",
+                    "target": "port"
+                }, {
+                    "source": "IP",
+                    "target": "service"
+                }, {
+                    "source": "IP",
+                    "target": "数据库"
+                }, {
+                    "source": "IP",
+                    "target": "开发语言"
+                }, {
+                    "source": "域名",
+                    "target": "HDFS"
+                }, {
+                    "source": "域名",
+                    "target": "YARN"
+                }, {
+                    "source": "域名",
+                    "target": "MapReduce"
+                }, {
+                    "source": "service",
+                    "target": "http"
+                }, {
+                    "source": "port",
+                    "target": "Scala"
+                }, {
+                    "source": "port",
+                    "target": "port SQL"
+                }, {
+                    "source": "port",
+                    "target": "port Streaming"
+                }, {
+                    "source": "service",
+                    "target": "https"
+                }, {
+                    "source": "service",
+                    "target": "redis"
+                }, {
+                    "source": "数据库",
+                    "target": "Redis"
+                }, {
+                    "source": "数据库",
+                    "target": "MongoDB"
+                }, {
+                    "source": "数据库",
+                    "target": "LevelDB"
+                }, {
+                    "source": "开发语言",
+                    "target": "Mahout"
+                }, {
+                    "source": "开发语言",
+                    "target": "port MLlib"
+                }, {
+                    "source": "开发语言",
+                    "target": "Python"
+                }, {
+                    "source": "开发语言",
+                    "target": "R语言"
+                }],
+                categories: [{
+                    'name': 'IP'
+                }, {
+                    'name': '域名'
+                }, {
+                    'name': 'port'
+                }, {
+                    'name': 'service'
+                }, {
+                    'name': '数据库'
+                }, {
+                    'name': '开发语言'
+                }],
+                roam: true,
+                label: {
+                    normal: {
+                        show: true,
+                        formatter: '{b}',
+                        position: 'inside',
+                        fontSize: 16,
+                        fontStyle: '500',
+                    }
+                },
+                lineStyle: {//连线的样式
+                    normal: {
+                        width: 2,
+                        color: '#04f2a7',
+                        // color: 'source',
+                        curveness: 0,
+                        type: "solid"
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#04f2a7',
+                    borderWidth: 2,
+                    shadowBlur: 6,
+                    shadowColor: '#04f2a7',
+                    color: '#001c43',
+                }
+            }]
+        };
+         myChart.setOption(option);
+         myChart.on('click',function(parme){
+            option.series[0].data=dataArray;
+            option.series[0].links=linksArray;
+            option.series[0].categories=categoriesArray;
+
+            myChart.setOption(option);
+
+         })
+
+
+
+         // console.log(dataArr);
+         // console.log(dataLinks);
+         // console.log(dataCategories);
+    </script>
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>graph</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div id="graph" style="height:600px;width:800px">
+
+    </div>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript">
+    var size = 60;
+    var size1 = 30;
+    var dataArray =  [{
+                    "name": "117.136.139.37",
+                    // x: 0,
+                    // y: yy,
+                    "symbolSize": 80,
+                    "category": "117.136.139.37",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }, {
+                    "name": "jf10086.cn",
+                    // x: 100,
+                    // y: yy1,
+                    "symbolSize": size,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+
+                }, {
+                    "name": "李海军",
+                    // x: 20,
+                    // y: yy,
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.36",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.38",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "lihaijun@chinamobile.com",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    // x: 70,
+                    // y: yy,
+                    "name": "port",
+                    "symbolSize": size,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 90,
+                    // y: yy1,
+                    "name": "80",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 100,
+                    // y: yy,
+                    "name": "8081",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 110,
+                    // y: yy1,
+                    "name": "443",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }];
+                var linksArray= [{
+                    "source": "117.136.139.37",
+                    "target": "jf10086.cn"
+                }, {
+                    "source": "117.136.139.37",
+                    "target": "port"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "李海军",
+                    "value": "注册人"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.36"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.38"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "lihaijun@chinamobile.com",
+                    "value": "邮箱"
+                }, {
+                    "source": "port",
+                    "target": "80"
+                },  {
+                    "source": "port",
+                    "target": "443"
+                }, {
+                    "source": "port",
+                    "target": "8081"
+                }];
+                var categoriesArray =  [{
+                    'name': '117.136.139.37'
+                }, {
+                    'name': 'jf10086.cn'
+                }, {
+                    'name': 'port'
+                }];
+        var dataArray1 =  [{
+                    "name": "117.136.139.38",
+                    // x: 0,
+                    // y: yy,
+                    "symbolSize": 80,
+                    "category": "117.136.139.38",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }, {
+                    "name": "jf10086.cn",
+                    // x: 100,
+                    // y: yy1,
+                    "symbolSize": size,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+
+                }, {
+                    "name": "李海军",
+                    // x: 20,
+                    // y: yy,
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.36",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.37",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "lihaijun@chinamobile.com",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    // x: 70,
+                    // y: yy,
+                    "name": "port",
+                    "symbolSize": size,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 90,
+                    // y: yy1,
+                    "name": "80",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 100,
+                    // y: yy,
+                    "name": "8081",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 110,
+                    // y: yy1,
+                    "name": "443",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }];
+                var linksArray1= [{
+                    "source": "117.136.139.38",
+                    "target": "jf10086.cn"
+                }, {
+                    "source": "117.136.139.38",
+                    "target": "port"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "李海军",
+                    "value": "注册人"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.36"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.37"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "lihaijun@chinamobile.com",
+                    "value": "邮箱"
+                }, {
+                    "source": "port",
+                    "target": "80"
+                },  {
+                    "source": "port",
+                    "target": "443"
+                }, {
+                    "source": "port",
+                    "target": "8081"
+                }];
+                var categoriesArray1 =  [{
+                    'name': '117.136.139.38'
+                }, {
+                    'name': 'jf10086.cn'
+                }, {
+                    'name': 'port'
+                }];
+
+        var dataArray2 =  [{
+                    "name": "117.136.139.36",
+                    // x: 0,
+                    // y: yy,
+                    "symbolSize": 80,
+                    "category": "117.136.139.36",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }, {
+                    "name": "jf10086.cn",
+                    // x: 100,
+                    // y: yy1,
+                    "symbolSize": size,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+
+                }, {
+                    "name": "李海军",
+                    // x: 20,
+                    // y: yy,
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.37",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.38",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "lihaijun@chinamobile.com",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    // x: 70,
+                    // y: yy,
+                    "name": "port",
+                    "symbolSize": size,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 90,
+                    // y: yy1,
+                    "name": "80",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 100,
+                    // y: yy,
+                    "name": "8081",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 110,
+                    // y: yy1,
+                    "name": "443",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }];
+                 var linksArray2 = [{
+                    "source": "117.136.139.36",
+                    "target": "jf10086.cn"
+                }, {
+                    "source": "117.136.139.36",
+                    "target": "port"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "李海军",
+                    "value": "注册人"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.37"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.38"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "lihaijun@chinamobile.com",
+                    "value": "邮箱"
+                }, {
+                    "source": "port",
+                    "target": "80"
+                },  {
+                    "source": "port",
+                    "target": "443"
+                }, {
+                    "source": "port",
+                    "target": "8081"
+                }];
+               var categoriesArray2 =  [{
+                    'name': '117.136.139.36'
+                }, {
+                    'name': 'jf10086.cn'
+                }, {
+                    'name': 'port'
+                }]
+         var data = {
+            service:['http','https'],
+            port:[80,81],
+            db:['mysql','mondb']
+         }
+         var dataArr = [{
+                    "name": "IP",
+                    // x: 0,
+                    // y: yy,
+                    "symbolSize": 80,
+                    "category": "IP",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }];
+         var dataLinks = [];
+         var dataCategories = [];
+         for (var h in data) {
+            var dt = {};
+            var categorie = {};
+            var linkstart = {};
+            categorie.name = h;
+            dt.name=h;
+            dt.draggable= true;
+            dt.symbolSize= 40;
+            dt.category = h;
+            linkstart.source = 'IP';
+            linkstart.target = h;
+            dataArr.push(dt);
+            dataCategories.push(categorie);
+            dataLinks.push(linkstart);
+            for (var j = 0; j < data[h].length; j++) {
+                var link = {};
+                var dtlast = {};
+                dtlast.name=data[h][j];
+                dtlast.draggable= true;
+                dtlast.symbolSize= 40;
+                dtlast.category = h;
+                link.source = h;
+                link.target = data[h][j];
+                dataLinks.push(link);
+                dataArr.push(dtlast);
+            };
+         };
+
+        var graph = document.getElementById('graph');
+        var myChart = echarts.init(graph);
+
+        var yy = 200;
+        var yy1 = 250;
+        option = {
+            title: {
+                text: "IP解读",
+                top: "top",
+                left: "middle",
+                textStyle: {
+                    color: '#4d4d4d'
+                }
+            },
+            tooltip: {
+                formatter: '{b}'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            backgroundColor: '#2a2c3a',
+            animationDuration: 1000,
+            animationEasingUpdate: 'quinticInOut',
+            // color:['red','yellow','blue','#ccc','#000'],
+            series: [{
+                name: 'IP分析',
+                type: 'graph',
+                cursor:'pointer',
+                focusNodeAdjacency:false,//是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点。
+                layout: 'force',
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [0, 8],
+                // 连接线上的文字
+                // focusNodeAdjacency: true,
+                edgeLabel: {
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 14
+                        },
+                        formatter:function(params){
+                            if (params.data.value) {
+                                return params.data.value;
+                            }else{
+                                return ' ';
+                            }
+                        }
+                    }
+                },
+                force: {
+                    repulsion: 1300,//节点之间的斥力因子
+                    // gravity: 0.1,//节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。
+                    // edgeLength: 70,//边的两个节点之间的距离，这个距离也会受 repulsion
+                    layoutAnimation: true,
+                },
+                data: [{
+                    "name": "117.136.139.36",
+                    x: 400,
+                    y: 300,
+                    fixed: true,
+                    "symbolSize": 80,
+                    "category": "117.136.139.36",
+                    // "draggable": "true"
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#04f2a7',
+                            borderWidth: 4,
+                            shadowBlur: 10,
+                            shadowColor: '#04f2a7',
+                            color: '#001c43',
+                        }
+                    }
+                }, {
+                    "name": "jf10086.cn",
+                    x: 200,
+                    y: 300,
+                    // fixed: true,
+                    "symbolSize": size,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+
+                }, {
+                    "name": "李海军",
+                    // x: 20,
+                    // y: yy,
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.37",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "117.136.139.38",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    // "draggable": "true"
+                },{
+                    // x: 30,
+                    // y: yy1,
+                    "name": "lihaijun@chinamobile.com",
+                    "symbolSize": size1,
+                    "category": "jf10086.cn",
+                    "draggable": "true"
+                }, {
+                    x: 600,
+                    y: 300,
+                    // fixed: true,
+                    "name": "port",
+                    "symbolSize": size,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 90,
+                    // y: yy1,
+                    "name": "80",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 100,
+                    // y: yy,
+                    "name": "8081",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }, {
+                    // x: 110,
+                    // y: yy1,
+                    "name": "443",
+                    "symbolSize": size1,
+                    "category": "port",
+                    "draggable": "true"
+                }],
+                links: [{
+                    "source": "117.136.139.36",
+                    "target": "jf10086.cn"
+                }, {
+                    "source": "117.136.139.36",
+                    "target": "port"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "李海军",
+                    "value": "注册人"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.37"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "117.136.139.38"
+                }, {
+                    "source": "jf10086.cn",
+                    "target": "lihaijun@chinamobile.com",
+                    "value": "邮箱"
+                }, {
+                    "source": "port",
+                    "target": "80"
+                },  {
+                    "source": "port",
+                    "target": "443"
+                }, {
+                    "source": "port",
+                    "target": "8081"
+                }],
+                categories: [{
+                    'name': '117.136.139.36'
+                }, {
+                    'name': 'jf10086.cn'
+                }, {
+                    'name': 'port'
+                }],
+                roam: true,
+                label: {
+                    normal: {
+                        show: true,
+                        formatter: '{b}',
+                        position: 'inside',
+                        fontSize: 16,
+                        fontStyle: '500',
+                    }
+                },
+                lineStyle: {//连线的样式
+                    normal: {
+                        width: 2,
+                        color: '#04f2a7',
+                        // color: 'source',
+                        curveness: 0,
+                        type: "solid"
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#04f2a7',
+                    borderWidth: 2,
+                    shadowBlur: 6,
+                    shadowColor: '#04f2a7',
+                    color: '#001c43',
+                }
+            }]
+        };
+         myChart.setOption(option);
+         myChart.on('click',function(parme){
+            console.log(parme);
+            var ip = parme.name;
+            var re=/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/;//正则表达式
+            if(re.test(ip))
+            {
+               if( RegExp.$1<256 && RegExp.$2<256 && RegExp.$3<256 && RegExp.$4<256){
+                if (ip == '117.136.139.37') {
+
+                    option.series[0].data=dataArray;
+                    option.series[0].links=linksArray;
+                    option.series[0].categories=categoriesArray;
+
+                    myChart.setOption(option);
+                };
+                if (ip == '117.136.139.38') {
+                    option.series[0].data=dataArray1;
+                    option.series[0].links=linksArray1;
+                    option.series[0].categories=categoriesArray1;
+
+                    myChart.setOption(option);
+                };
+                if (ip == '117.136.139.36') {
+                    option.series[0].data=dataArray2;
+                    option.series[0].links=linksArray2;
+                    option.series[0].categories=categoriesArray2;
+
+                    myChart.setOption(option);
+                };
+               }
+
+            }
+
+         })
+
+
+
+         // console.log(dataArr);
+         // console.log(dataLinks);
+         // console.log(dataCategories);
+    </script>
+</body>
+</html>
